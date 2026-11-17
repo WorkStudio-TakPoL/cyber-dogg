@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CYBER DOGG — компьютерный клуб в Гусь-Хрустальном</title>
+<meta name="description" content="CYBER DOGG — компьютерный клуб 24/7 в Гусь-Хрустальном, Интернациональная ул., 18. ПК на RTX 4060 и 4060 Ti, VIP-комната, PlayStation 5, кухня «Стрит Фуд 67». Час игры от 65 ₽.">
+<meta name="theme-color" content="#07070f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Exo+2:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070f;
+  --bg-2:#0e0d1c;
+  --card:#13122a;
+  --card-2:#1b1838;
+  --line:#2d2852;
+  --fg:#ecebff;
+  --muted:#a29fc7;
+  --cyan:#2bb8ff;   /* brand blue */
+  --pink:#ff2d55;   /* brand red */
+  --lime:#c6ff3d;
+  --amber:#ffc83d;
+  --font-display:"Russo One", system-ui, sans-serif;
+  --font-body:"Exo 2", system-ui, sans-serif;
+  --font-mono:"JetBrains Mono", ui-monospace, monospace;
+  --gutter:clamp(16px, 4vw, 40px);
+  --maxw:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.mono{font-family:var(--font-mono)}
+
+/* ---------- global FX ---------- */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;background:repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px);mix-blend-mode:overlay}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%)}
+
+/* ---------- buttons ---------- */
+.btn{
+  --c:var(--lime);
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  min-height:52px;padding:0 26px;white-space:nowrap;
+  font-family:var(--font-display);font-size:16px;letter-spacing:.06em;text-transform:uppercase;
+  color:#07070f;background:var(--c);
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  transition:transform .2s ease, filter .2s ease;
+}
+.btn:hover{filter:brightness(1.12) drop-shadow(0 0 14px var(--c));transform:translateY(-2px)}
+.btn:active{transform:translateY(1px)}
+.btn--ghost{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 2px var(--line)}
+.btn--ghost:hover{box-shadow:inset 0 0 0 2px var(--cyan);color:var(--cyan);filter:none}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* ---------- header ---------- */
+.hud{position:fixed;top:0;left:0;right:0;z-index:50;background:linear-gradient(180deg, rgba(7,7,15,.92), rgba(7,7,15,.72));backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hud__in{display:flex;align-items:center;gap:20px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:20px;letter-spacing:.04em;white-space:nowrap}
+.logo svg{width:40px;height:32px}
+.logo b{color:var(--cyan);font-weight:400}
+.logo i{font-style:normal;color:var(--pink)}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:10px 10px;color:var(--muted);transition:color .2s;white-space:nowrap}
+.nav a:hover{color:var(--lime)}
+.status{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;color:var(--lime);padding:6px 10px;border:1px solid rgba(198,255,61,.35);white-space:nowrap}
+.status i{width:8px;height:8px;background:var(--lime);box-shadow:0 0 10px var(--lime);animation:blink 1.4s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+.hud .btn{min-height:44px;padding:0 18px;font-size:14px}
+@media (max-width:1140px){.nav{display:none}.status{margin-left:auto}}
+@media (max-width:540px){.status{display:none}.hud .btn span{display:none}.hud .btn{margin-left:auto;padding:0 14px}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;padding:120px 0 60px;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.hero__photo{position:absolute;inset:0;z-index:-3;background-size:cover;background-position:center;opacity:.22;filter:saturate(1.2)}
+.hero__photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,15,.55),rgba(7,7,15,.2) 40%,var(--bg) 96%)}
+.hero__grid{position:absolute;left:-50%;right:-50%;bottom:-10%;height:60%;z-index:-1;
+  background:linear-gradient(transparent 0 calc(100% - 2px), rgba(255,45,85,.55) 0) 0 0/100% 48px, linear-gradient(90deg, transparent 0 calc(100% - 2px), rgba(43,184,255,.4) 0) 0 0/64px 100%;
+  transform:perspective(420px) rotateX(62deg);transform-origin:center top;
+  mask-image:linear-gradient(to bottom, transparent, #000 35%);-webkit-mask-image:linear-gradient(to bottom, transparent, #000 35%);
+  animation:floor 2.4s linear infinite}
+@keyframes floor{to{background-position:0 48px, 0 0}}
+.hero__sun{position:absolute;z-index:-2;left:50%;top:38%;width:min(70vw,620px);aspect-ratio:1;translate:-50% -50%;background:radial-gradient(circle, rgba(43,184,255,.32), rgba(255,45,85,.18) 45%, transparent 70%);filter:blur(10px)}
+.hero__in{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
+@media (max-width:900px){.hero__in{grid-template-columns:1fr}.hero__art{order:-1;width:min(230px,62vw);margin:0 auto}.hero{padding-top:96px}}
+.tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:22px}
+.tag::before{content:"";width:28px;height:2px;background:var(--cyan)}
+.title{font-family:var(--font-display);font-weight:400;line-height:.92;font-size:clamp(56px, 11vw, 138px);letter-spacing:-.01em;text-transform:uppercase}
+.title .l2{display:block;color:transparent;-webkit-text-stroke:2px var(--pink);text-shadow:0 0 30px rgba(255,45,85,.35)}
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;pointer-events:none}
+.glitch::before{color:var(--cyan);clip-path:inset(0 0 60% 0);opacity:0;animation:gl1 3.2s infinite steps(1)}
+.glitch::after{color:var(--pink);clip-path:inset(55% 0 0 0);opacity:0;animation:gl2 2.7s infinite steps(1)}
+@keyframes gl1{0%,92%{transform:translate(0);opacity:0}93%{transform:translate(-5px,-2px);opacity:.8}96%{transform:translate(4px,1px)}100%{opacity:0}}
+@keyframes gl2{0%,88%{transform:translate(0);opacity:0}89%{transform:translate(5px,2px);opacity:.8}93%{transform:translate(-4px,0)}100%{opacity:0}}
+.lead{max-width:560px;margin:26px 0 34px;font-size:clamp(17px,2vw,20px);color:var(--muted)}
+.lead strong{color:var(--fg);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.stats{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);max-width:640px}
+.stat{background:var(--bg-2);padding:16px 18px}
+.stat__k{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.stat__v{font-family:var(--font-display);font-size:28px;line-height:1.2;margin-top:4px;white-space:nowrap}
+.stat__v small{font-size:14px;color:var(--muted)}
+.stat:nth-child(1) .stat__v{color:var(--amber)}
+.stat:nth-child(2) .stat__v{color:var(--lime)}
+.stat:nth-child(3) .stat__v{color:var(--cyan)}
+.stat:nth-child(4) .stat__v{color:var(--pink)}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* bulldog art */
+.hero__art{position:relative}
+.dog-frame{position:relative;aspect-ratio:1;padding:13% 10% 16%;border:1px solid var(--line);
+  background:radial-gradient(circle at 50% 50%, rgba(255,45,85,.14), transparent 60%),linear-gradient(var(--line) 1px, transparent 1px) 0 0/24px 24px,linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/24px 24px,var(--bg-2);
+  background-blend-mode:normal, overlay, overlay, normal}
+.dog-frame .c{position:absolute;width:30px;height:30px;border:3px solid var(--pink)}
+.dog-frame .c1{top:-2px;left:-2px;border-right:0;border-bottom:0}
+.dog-frame .c2{top:-2px;right:-2px;border-left:0;border-bottom:0}
+.dog-frame .c3{bottom:-2px;left:-2px;border-right:0;border-top:0}
+.dog-frame .c4{bottom:-2px;right:-2px;border-left:0;border-top:0}
+#dog{width:100%;height:100%;filter:drop-shadow(0 0 16px rgba(255,45,85,.35));cursor:pointer}
+.dog-label{position:absolute;left:14px;top:12px;font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:.1em}
+.dog-hp{position:absolute;left:14px;right:14px;bottom:12px;font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+.bar{height:8px;background:#1f1c3b;margin-top:6px;position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--pink),var(--cyan));transform-origin:left}
+.bark{position:absolute;right:4%;top:9%;font-family:var(--font-display);font-size:26px;color:var(--amber);pointer-events:none;opacity:0;text-shadow:0 0 18px rgba(255,200,61,.6)}
+
+/* ---------- ticker ---------- */
+.ticker{border-block:1px solid var(--line);background:var(--bg-2);overflow:hidden;padding:14px 0}
+.ticker__track{display:flex;width:max-content;animation:tick 36s linear infinite}
+.ticker span{font-family:var(--font-display);font-size:20px;text-transform:uppercase;white-space:nowrap;color:var(--muted);padding-right:24px}
+.ticker span b{color:var(--pink);font-weight:400;margin-left:24px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{position:relative}
+.sec{padding:clamp(80px,12vw,140px) 0}
+.sec--tight{padding-top:0}
+.sec__head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px;margin-bottom:48px}
+.sec__no{font-family:var(--font-mono);font-size:13px;color:var(--pink);letter-spacing:.14em}
+.h2{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,5.6vw,64px);line-height:1}
+.h2 em{font-style:normal;color:var(--cyan)}
+.sec__sub{max-width:440px;color:var(--muted)}
+.note{margin-top:22px;font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.note a{color:var(--cyan);text-decoration:underline;text-underline-offset:3px}
+
+/* zones */
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:980px){.levels{grid-template-columns:1fr;max-width:620px}}
+.lvl{--c:var(--cyan);position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);padding:0 26px 26px;
+  clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,28px 100%,0 calc(100% - 28px));transition:border-color .25s, transform .25s}
+.lvl:hover{border-color:var(--c);transform:translateY(-6px)}
+.lvl--vip{--c:var(--amber)}
+.lvl--ps{--c:var(--pink)}
+.lvl__img{margin:0 -26px;aspect-ratio:16/10;overflow:hidden;position:relative;background:var(--bg-2)}
+.lvl__img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1),filter .3s;filter:saturate(1.1) brightness(.85)}
+.lvl:hover .lvl__img img{transform:scale(1.06);filter:saturate(1.25) brightness(1)}
+.lvl__img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,var(--card-2))}
+.lvl__top{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;color:var(--muted);margin-top:16px}
+.lvl__badge{color:var(--c);border:1px solid var(--c);padding:3px 8px}
+.lvl h3{font-family:var(--font-display);font-weight:400;font-size:30px;text-transform:uppercase;line-height:1.1;margin-top:14px}
+.lvl > p{color:var(--muted);margin-top:8px;font-size:15.5px}
+.specs{margin:18px 0 22px;display:grid;gap:0;border-top:1px solid var(--line)}
+.specs div{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px;align-items:baseline}
+.specs dt{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.specs dd{color:var(--fg)}
+.specs dd b{color:var(--c);font-weight:600}
+.lvl__price{margin-top:auto;display:flex;align-items:baseline;gap:8px;padding-top:6px}
+.lvl__price small{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.lvl__price b{font-family:var(--font-display);font-weight:400;font-size:40px;color:var(--c);line-height:1}
+.lvl__price span{color:var(--muted);font-size:14px}
+
+/* perks */
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+@media (max-width:960px){.perks{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.perks{grid-template-columns:1fr}}
+.perk{background:var(--bg);padding:30px 26px;position:relative;transition:background .25s;outline:1px solid var(--line)}
+.perk:hover{background:var(--card)}
+.perk svg{width:36px;height:36px;color:var(--lime);margin-bottom:22px;transition:transform .3s}
+.perk:hover svg{transform:translateY(-4px) rotate(-6deg)}
+.perk h3{font-family:var(--font-display);font-weight:400;font-size:19px;text-transform:uppercase;line-height:1.2}
+.perk p{color:var(--muted);font-size:15px;margin-top:8px}
+.perk__n{position:absolute;right:18px;top:16px;font-family:var(--font-mono);font-size:11px;color:#4a4578}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(150px,18vw,230px);grid-auto-flow:dense;gap:12px}
+.shot{position:relative;overflow:hidden;background:var(--bg-2);border:1px solid var(--line);padding:0;cursor:zoom-in;display:block;width:100%;height:100%}
+.shot--w{grid-column:span 2}
+.shot--t{grid-row:span 2}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1),filter .3s;filter:brightness(.82) saturate(1.1)}
+.shot:hover img,.shot:focus-visible img{transform:scale(1.07);filter:brightness(1) saturate(1.25)}
+.shot__cap{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:8px;padding:26px 12px 10px;background:linear-gradient(transparent,rgba(7,7,15,.9));font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);text-align:left}
+.shot__cap i{font-style:normal;color:var(--lime)}
+.shot::before,.shot::after{content:"";position:absolute;z-index:2;width:16px;height:16px;border:2px solid var(--pink);opacity:0;transition:opacity .25s}
+.shot::before{top:10px;left:10px;border-right:0;border-bottom:0}
+.shot::after{bottom:10px;right:10px;border-left:0;border-top:0}
+.shot:hover::before,.shot:hover::after,.shot:focus-visible::before,.shot:focus-visible::after{opacity:1}
+@media (max-width:860px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.gallery{grid-auto-rows:150px;gap:8px}}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(5,5,12,.94);backdrop-filter:blur(6px);padding:60px 16px}
+.lb.open{display:flex}
+.lb figure{position:relative;max-width:min(1100px,100%);max-height:100%;display:flex;flex-direction:column;gap:12px}
+.lb img{max-width:100%;max-height:calc(100svh - 160px);object-fit:contain;border:1px solid var(--line);box-shadow:0 0 60px rgba(43,184,255,.15)}
+.lb figcaption{display:flex;justify-content:space-between;gap:12px;font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.lb figcaption b{color:var(--lime);font-weight:600}
+.lb__btn{position:absolute;z-index:2;width:52px;height:52px;display:grid;place-items:center;background:var(--card-2);border:1px solid var(--line);color:var(--fg);transition:border-color .2s,color .2s}
+.lb__btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.lb__btn svg{width:22px;height:22px}
+.lb__close{top:16px;right:16px}
+.lb__prev{left:16px;top:50%;translate:0 -50%}
+.lb__next{right:16px;top:50%;translate:0 -50%}
+@media (max-width:640px){.lb__prev,.lb__next{top:auto;bottom:16px;translate:none}}
+
+/* prices */
+.prices{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;align-items:start}
+@media (max-width:960px){.prices{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);padding:clamp(18px,3.4vw,34px)}
+.panel h3{font-family:var(--font-display);font-weight:400;font-size:22px;text-transform:uppercase}
+.ptable{width:100%;border-collapse:collapse;margin-top:16px;font-variant-numeric:tabular-nums}
+.ptable th,.ptable td{padding:8px 6px;text-align:right;white-space:nowrap}
+.ptable th:first-child,.ptable td:first-child{text-align:left;white-space:normal}
+.ptable thead th{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--muted);font-weight:400;text-transform:uppercase}
+.ptable thead tr:first-child th{font-family:var(--font-display);font-size:18px;color:var(--fg);letter-spacing:.04em;padding-bottom:0}
+.ptable thead tr:first-child th.vip{color:var(--amber)}
+.ptable thead tr:first-child th.ps{color:var(--pink)}
+.ptable td{font-family:var(--font-display);font-size:17px;border-top:1px solid rgba(45,40,82,.6)}
+.ptable td:first-child{font-family:var(--font-body);font-size:14px;color:var(--muted)}
+.ptable td.we{color:var(--pink)}
+.ptable tr.grp td{border-top:2px solid var(--line)}
+.ptable tbody tr{transition:background .2s}
+.ptable tbody tr:hover{background:rgba(43,184,255,.06)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-family:var(--font-mono);font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 10px;white-space:nowrap}
+.chip b{color:var(--fg);font-weight:600;margin-right:6px}
+.wkd{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin-top:10px}
+.wkd span{color:var(--pink)}
+@media (max-width:520px){.ptable th,.ptable td{padding:7px 3px}.ptable td{font-size:15px}.ptable td:first-child{font-size:12.5px}.ptable thead tr:first-child th{font-size:15px}}
+
+/* calculator */
+.calc{margin-top:20px;display:grid;grid-template-columns:1.2fr .8fr;gap:0;border:1px solid var(--line);background:var(--card)}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+.calc__ctl{padding:clamp(18px,3.4vw,34px);display:grid;gap:20px}
+.calc__out{padding:clamp(18px,3.4vw,34px);background:linear-gradient(160deg,rgba(198,255,61,.08),transparent 60%),var(--bg-2);border-left:1px solid var(--line);display:flex;flex-direction:column}
+@media (max-width:860px){.calc__out{border-left:0;border-top:1px solid var(--line)}}
+.fld legend,.fld label{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.fld{border:0}
+.fld label b{color:var(--lime);font-size:15px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{min-height:44px;padding:0 16px;border:1px solid var(--line);background:var(--bg-2);font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);transition:color .2s,border-color .2s,background .2s}
+.seg button:hover:not(:disabled){color:var(--fg);border-color:var(--cyan)}
+.seg button[aria-pressed="true"]{background:var(--lime);border-color:var(--lime);color:var(--bg)}
+.seg button:disabled{opacity:.3;cursor:not-allowed}
+.seg button small{font-family:var(--font-mono);font-size:10px;margin-left:6px;opacity:.75}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:28px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:10px;background:linear-gradient(90deg,var(--lime) var(--p,0%), #25224a var(--p,0%))}
+input[type=range]::-moz-range-track{height:10px;background:#25224a}
+input[type=range]::-moz-range-progress{height:10px;background:var(--lime)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-8px;background:var(--fg);border:4px solid var(--bg);box-shadow:0 0 0 2px var(--lime)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:0;background:var(--fg);border:4px solid var(--bg);box-shadow:0 0 0 2px var(--lime)}
+.out__k{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.out__total{font-family:var(--font-display);font-size:clamp(52px,8vw,76px);line-height:1;color:var(--lime);margin:10px 0 6px;font-variant-numeric:tabular-nums}
+.out__rows{display:grid;gap:8px;margin:14px 0 22px;font-size:15px}
+.out__rows div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.out__rows span{color:var(--muted)}
+.save{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:var(--font-mono);font-size:13px;color:var(--bg);background:var(--amber);padding:5px 10px}
+.save[hidden]{display:none}
+.calc__out .btn{margin-top:auto}
+
+/* kitchen */
+.kitchen{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:start}
+@media (max-width:960px){.kitchen{grid-template-columns:1fr}}
+.kitchen__promo{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--bg-2)}
+.kitchen__promo img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;filter:saturate(1.1) brightness(.9)}
+.kitchen__promo .txt{padding:22px 24px 26px}
+.brand67{font-family:var(--font-display);font-size:30px;text-transform:uppercase;line-height:1.05;color:var(--amber)}
+.brand67 span{display:block;font-size:14px;font-family:var(--font-mono);letter-spacing:.14em;color:var(--muted);margin-bottom:6px}
+.kitchen__promo p{color:var(--muted);margin-top:10px;font-size:15.5px}
+.loot{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.loot div{border:1px solid var(--line);padding:10px 12px;background:var(--card)}
+.loot b{display:block;font-family:var(--font-display);font-weight:400;color:var(--amber);font-size:20px}
+.loot span{font-size:13px;color:var(--muted)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.tabs button{flex:none;min-height:44px;padding:0 14px;border:1px solid var(--line);background:var(--bg-2);font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:color .2s,border-color .2s,background .2s}
+.tabs button:hover{color:var(--fg);border-color:var(--amber)}
+.tabs button[aria-selected="true"]{background:var(--amber);border-color:var(--amber);color:var(--bg);font-weight:700}
+.menu{margin-top:14px;display:grid;gap:8px}
+.mi{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:12px 16px;border:1px solid var(--line);background:var(--card);transition:border-color .2s, transform .2s}
+.mi:hover{border-color:rgba(255,200,61,.6);transform:translateX(3px)}
+.mi h4{font-family:var(--font-body);font-weight:700;font-size:16px}
+.mi h4 small{font-weight:400;color:var(--muted);font-size:13px;margin-left:6px;font-family:var(--font-mono)}
+.mi p{grid-column:1/2;font-size:13.5px;color:var(--muted);line-height:1.4}
+.mi .pr{grid-row:1/3;grid-column:2;align-self:center;font-family:var(--font-display);font-size:20px;color:var(--amber);white-space:nowrap}
+.menu__sub{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin:10px 0 2px}
+
+/* achievement + reviews */
+.ach{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;background:linear-gradient(90deg, rgba(255,200,61,.10), rgba(255,200,61,0) 60%), var(--card);border:1px solid rgba(255,200,61,.35);padding:28px clamp(20px,4vw,40px)}
+.ach__ico{width:84px;height:84px;color:var(--amber);filter:drop-shadow(0 0 16px rgba(255,200,61,.5))}
+.ach__k{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;color:var(--amber);text-transform:uppercase}
+.ach__t{font-family:var(--font-display);font-size:clamp(24px,3.4vw,38px);text-transform:uppercase;line-height:1.1;margin-top:6px}
+.ach__d{color:var(--muted);margin-top:6px}
+.ach__score{text-align:right}
+.ach__score b{display:block;font-family:var(--font-display);font-weight:400;font-size:56px;color:var(--amber);line-height:1}
+.stars{display:flex;gap:4px;justify-content:flex-end;margin:8px 0 4px}
+.stars svg{width:18px;height:18px;color:var(--amber)}
+.ach__score span{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+@media (max-width:760px){.ach{grid-template-columns:1fr}.ach__score{text-align:left}.stars{justify-content:flex-start}}
+.log{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.log{grid-template-columns:1fr}}
+.msg{background:var(--bg-2);border:1px solid var(--line);padding:22px;font-size:15.5px}
+.msg__h{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;color:var(--muted);margin-bottom:12px}
+.msg__h i{width:10px;height:10px;background:var(--c, var(--cyan))}
+.msg__h b{color:var(--c, var(--cyan));font-weight:600}
+
+/* contacts */
+.contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px}
+@media (max-width:900px){.contact{grid-template-columns:1fr}}
+.info{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);align-content:start}
+.info__row{background:var(--bg-2);padding:20px 22px;display:grid;grid-template-columns:28px 1fr;gap:16px}
+.info__row > svg{width:26px;height:26px;color:var(--pink)}
+.info__k{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.info__v{font-family:var(--font-display);font-size:clamp(18px,2.4vw,23px);margin-top:4px;line-height:1.25}
+.info__v a:hover{color:var(--cyan)}
+.info__btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.info__btns .btn{min-height:46px;padding:0 18px;font-size:14px}
+.quest{list-style:none;display:grid;gap:14px;counter-reset:q}
+.quest li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;counter-increment:q}
+.quest li::before{content:counter(q);display:grid;place-items:center;width:40px;height:40px;font-family:var(--font-display);font-size:18px;color:var(--bg);background:var(--cyan);clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.quest b{display:block;font-family:var(--font-display);font-weight:400;font-size:17px;text-transform:uppercase}
+.quest p{color:var(--muted);font-size:14.5px}
+.map{position:relative;min-height:440px;border:1px solid var(--line);background:var(--bg-2);overflow:hidden}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:invert(.92) hue-rotate(200deg) saturate(.8) contrast(.95)}
+.map__corner{position:absolute;z-index:2;left:0;top:0;padding:8px 12px;background:var(--pink);color:var(--bg);font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.1em}
+
+/* final */
+.final{text-align:center;padding:clamp(90px,14vw,160px) 0;border-top:1px solid var(--line);overflow:hidden}
+.final .h2{font-size:clamp(44px,9vw,120px)}
+.final p{color:var(--muted);margin:20px auto 36px;max-width:480px}
+.final .cta{justify-content:center}
+.count{font-family:var(--font-mono);color:var(--pink);font-size:14px;letter-spacing:.3em;margin-bottom:18px}
+footer{border-top:1px solid var(--line);padding:28px 0;font-family:var(--font-mono);font-size:12px;color:#6d68a0}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+footer kbd{border:1px solid var(--line);padding:1px 6px;color:var(--muted)}
+.dock{position:fixed;left:16px;right:16px;bottom:16px;z-index:60;display:none}
+.dock .btn{width:100%}
+@media (max-width:640px){.dock{display:block}footer{padding-bottom:96px}}
+.toast{position:fixed;left:50%;top:90px;z-index:120;translate:-50% 0;display:flex;gap:14px;align-items:center;padding:14px 20px;background:var(--card-2);border:1px solid var(--amber);font-family:var(--font-mono);font-size:13px;opacity:0;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast b{color:var(--amber)}
+
+/* hero intro: pure CSS so it never waits for the network */
+[data-hero],[data-hero-art]{animation:heroIn .8s cubic-bezier(.16,1,.3,1) both}
+.title[data-hero]{animation-delay:.14s}
+.lead[data-hero]{animation-delay:.23s}
+.cta[data-hero]{animation-delay:.32s}
+.stats[data-hero]{animation-delay:.41s}
+[data-hero-art]{animation-name:artIn;animation-duration:1s;animation-delay:.25s}
+@keyframes heroIn{from{opacity:0;transform:translateY(30px)}}
+@keyframes artIn{from{opacity:0;transform:scale(.9) rotate(-4deg)}}
+.js-motion [data-reveal]{opacity:0}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+  .js-motion [data-reveal]{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<header class="hud">
+  <div class="wrap hud__in">
+    <a href="#top" class="logo" aria-label="CYBER DOGG — на главную">
+      <svg viewBox="0 0 20 16" aria-hidden="true" shape-rendering="crispEdges" id="logo-dog"></svg>
+      CYBER<b>DOGG</b>
+    </a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#zones">Зоны</a>
+      <a href="#gallery">Фото</a>
+      <a href="#prices">Цены</a>
+      <a href="#food">Кухня</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#map">Где мы</a>
+    </nav>
+    <div class="status"><i></i>ONLINE 24/7</div>
+    <a class="btn" href="tel:+79101785252" aria-label="Позвонить: +7 910 178-52-52">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span>Забронировать</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__photo" aria-hidden="true" style="background-image:url('images/photo-01-lg.jpg')"></div>
+    <div class="hero__sun" aria-hidden="true"></div>
+    <div class="hero__grid" aria-hidden="true"></div>
+    <div class="wrap hero__in">
+      <div>
+        <div class="tag" data-hero>Кибер-арена · Гусь-Хрустальный</div>
+        <h1 class="title" data-hero>
+          <span class="glitch" data-text="Cyber">Cyber</span>
+          <span class="l2">Dogg</span>
+        </h1>
+        <p class="lead" data-hero>
+          ПК на <strong>RTX 4060 и 4060 Ti</strong>, VIP-комната, <strong>PlayStation 5</strong> и своя кухня «Стрит Фуд 67».
+          Открыты <strong>круглосуточно</strong>, час игры — <strong>от 65 ₽</strong>.
+        </p>
+        <div class="cta" data-hero>
+          <a class="btn" href="tel:+79101785252">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Press start
+          </a>
+          <a class="btn btn--ghost" href="#prices">Тарифы</a>
+        </div>
+        <div class="stats" data-hero>
+          <div class="stat"><div class="stat__k">Рейтинг</div><div class="stat__v"><span data-count="5" data-dec="1">5,0</span><small> / 5</small></div></div>
+          <div class="stat"><div class="stat__k">Оценок</div><div class="stat__v" data-count="153">153</div></div>
+          <div class="stat"><div class="stat__k">Работаем</div><div class="stat__v">24/7</div></div>
+          <div class="stat"><div class="stat__k">Час игры</div><div class="stat__v"><small>от </small><span data-count="65">65</span><small> ₽</small></div></div>
+        </div>
+      </div>
+
+      <div class="hero__art" data-hero-art>
+        <div class="dog-frame">
+          <i class="c c1"></i><i class="c c2"></i><i class="c c3"></i><i class="c c4"></i>
+          <span class="dog-label">PLAYER_01 · BULLDOGG</span>
+          <svg id="dog" viewBox="0 0 20 16" shape-rendering="crispEdges" role="img" aria-label="Пиксельный кибер-бульдог, талисман клуба. Нажми, чтобы погладить"></svg>
+          <div class="bark" aria-hidden="true">ГРРР-ГАВ!</div>
+          <div class="dog-hp">
+            <div style="display:flex;justify-content:space-between"><span>HP</span><span id="pets">погладь меня</span></div>
+            <div class="bar"><i id="hp"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>RTX 4060 Ti<b>✦</b></span><span>Intel Core i5-14400F<b>✦</b></span><span>32 ГБ RAM<b>✦</b></span><span>VIP-комната<b>✦</b></span><span>PlayStation 5<b>✦</b></span><span>Стрит Фуд 67<b>✦</b></span><span>Открыты 24/7<b>✦</b></span><span>Хорошее место 2026<b>✦</b></span>
+      <span>RTX 4060 Ti<b>✦</b></span><span>Intel Core i5-14400F<b>✦</b></span><span>32 ГБ RAM<b>✦</b></span><span>VIP-комната<b>✦</b></span><span>PlayStation 5<b>✦</b></span><span>Стрит Фуд 67<b>✦</b></span><span>Открыты 24/7<b>✦</b></span><span>Хорошее место 2026<b>✦</b></span>
+    </div>
+  </div>
+
+  <!-- ZONES -->
+  <section class="sec" id="zones">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <div class="sec__no" data-reveal>01 // SELECT LEVEL</div>
+          <h2 class="h2" data-reveal>Выбери <em>зону</em></h2>
+        </div>
+        <p class="sec__sub" data-reveal>Общий зал, отдельная VIP-комната или PS5 на диване — сравни железо и выбирай.</p>
+      </div>
+
+      <div class="levels" data-stagger>
+        <article class="lvl">
+          <div class="lvl__img"><img src="images/photo-02.jpg" alt="Ряд игровых ПК с подсветкой в общем зале" loading="lazy" width="800" height="500"></div>
+          <div class="lvl__top"><span>LVL 01</span><span class="lvl__badge">ОБЩИЙ ЗАЛ</span></div>
+          <h3>Standart</h3>
+          <p>Основной зал — для катки соло или всей пати.</p>
+          <dl class="specs">
+            <div><dt>Видеокарта</dt><dd><b>RTX 4060</b></dd></div>
+            <div><dt>Процессор</dt><dd>Intel Core i5-14400F</dd></div>
+            <div><dt>Память</dt><dd>32 ГБ</dd></div>
+            <div><dt>Монитор</dt><dd>24.5" MSI MAG 255X / 27" Acer Nitro</dd></div>
+            <div><dt>Гарнитура</dt><dd>HyperX Cloud II</dd></div>
+            <div><dt>Мышь</dt><dd>Logitech G102 Lightsync</dd></div>
+            <div><dt>Клава</dt><dd>Dark Project Arena KD-1</dd></div>
+            <div><dt>Кресло</dt><dd>Zone 51 Clubpoint</dd></div>
+          </dl>
+          <div class="lvl__price"><small>от</small><b>65 ₽</b><span>/ час</span></div>
+        </article>
+
+        <article class="lvl lvl--vip">
+          <div class="lvl__img"><img src="images/vip-door.jpg" alt="Вход в VIP-комнату с неоновой вывеской VIP" loading="lazy" width="600" height="800" style="object-position:50% 35%"></div>
+          <div class="lvl__top"><span>LVL 02</span><span class="lvl__badge">VIP-КОМНАТА</span></div>
+          <h3>VIP</h3>
+          <p>Отдельная комната за неоновой дверью — для своей команды.</p>
+          <dl class="specs">
+            <div><dt>Видеокарта</dt><dd><b>RTX 4060 Ti</b></dd></div>
+            <div><dt>Процессор</dt><dd>Intel Core i5-14400F</dd></div>
+            <div><dt>Память</dt><dd>32 ГБ</dd></div>
+            <div><dt>Монитор</dt><dd>27" AIWA MD2707</dd></div>
+            <div><dt>Гарнитура</dt><dd>HyperX Cloud III</dd></div>
+            <div><dt>Мышь</dt><dd>Logitech G403 Hero</dd></div>
+            <div><dt>Клава</dt><dd>Dark Project KD87A</dd></div>
+            <div><dt>Кресло</dt><dd>Zone 51 Arena Pro</dd></div>
+          </dl>
+          <div class="lvl__price"><small>от</small><b>100 ₽</b><span>/ час</span></div>
+        </article>
+
+        <article class="lvl lvl--ps">
+          <div class="lvl__img"><img src="images/ps5-room.jpg" alt="Комната с PlayStation 5 и большим изогнутым телевизором" loading="lazy" width="600" height="800" style="object-position:50% 40%"></div>
+          <div class="lvl__top"><span>LVL 03</span><span class="lvl__badge">КОНСОЛЬ</span></div>
+          <h3>PS5</h3>
+          <p>Отдельная комната с большим изогнутым ТВ — UFC, футбол и файтинги вдвоём или компанией.</p>
+          <dl class="specs">
+            <div><dt>Консоль</dt><dd><b>PlayStation 5</b></dd></div>
+            <div><dt>Экран</dt><dd>Большой изогнутый ТВ</dd></div>
+            <div><dt>Формат</dt><dd>Отдельная комната</dd></div>
+            <div><dt>День</dt><dd>08:00–18:00</dd></div>
+            <div><dt>Вечер</dt><dd>18:00–08:00</dd></div>
+          </dl>
+          <div class="lvl__price"><small>от</small><b>200 ₽</b><span>/ час</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERKS -->
+  <section class="sec sec--tight" id="perks">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <div class="sec__no" data-reveal>02 // PERKS UNLOCKED</div>
+          <h2 class="h2" data-reveal>Твои <em>перки</em></h2>
+        </div>
+        <p class="sec__sub" data-reveal>За это нас хвалят в отзывах чаще всего.</p>
+      </div>
+      <div class="perks" data-stagger>
+        <div class="perk"><span class="perk__n">#01</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="1"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>
+          <h3>Мощное железо</h3><p>i5-14400F, RTX 4060 / 4060 Ti и 32 ГБ памяти — новинки на ультрах.</p></div>
+        <div class="perk"><span class="perk__n">#02</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 9a15 15 0 0 1 20 0M5.5 12.5a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19.5" r="1" fill="currentColor"/></svg>
+          <h3>Низкий пинг</h3><p>Быстрый интернет, который не вылетает посреди матча.</p></div>
+        <div class="perk"><span class="perk__n">#03</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          <h3>Всё установлено</h3><p>Популярные игры уже стоят. Нет нужной — админ поможет поставить.</p></div>
+        <div class="perk"><span class="perk__n">#04</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 11h18M4 11a8 6 0 0 1 16 0M3 15h18l-1 2H4zM4 17v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/></svg>
+          <h3>Своя кухня</h3><p>«Стрит Фуд 67»: бургеры, шаурма, хот-доги, лимонады и коктейли.</p></div>
+        <div class="perk"><span class="perk__n">#05</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+          <h3>Админы на связи</h3><p>Объяснят, запустят игру и решат проблему с техникой.</p></div>
+        <div class="perk"><span class="perk__n">#06</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+          <h3>Чисто и спокойно</h3><p>Культурная атмосфера — комфортно и новичкам, и девушкам.</p></div>
+        <div class="perk"><span class="perk__n">#07</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
+          <h3>Пакеты выгоднее</h3><p>3 и 5 часов, ночь и сутки — дешевле, чем брать по часу.</p></div>
+        <div class="perk"><span class="perk__n">#08</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 11h16v10H4zM2 7h20v4H2zM12 7v14"/><path d="M12 7c-2-4-6-4-6-1.5S10 7 12 7zM12 7c2-4 6-4 6-1.5S14 7 12 7z"/></svg>
+          <h3>Дни рождения</h3><p>Собери пати, закажи еду и отметь праздник за любимыми играми.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="sec sec--tight" id="gallery">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <div class="sec__no" data-reveal>03 // SCREENSHOTS</div>
+          <h2 class="h2" data-reveal>Осмотри <em>локацию</em></h2>
+        </div>
+        <p class="sec__sub" data-reveal>Неон, удобные кресла и ряды мощных ПК — так клуб выглядит изнутри. Нажми на фото, чтобы открыть.</p>
+      </div>
+      <div class="gallery" data-stagger id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- PRICES -->
+  <section class="sec sec--tight" id="prices">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <div class="sec__no" data-reveal>04 // SHOP</div>
+          <h2 class="h2" data-reveal>Тарифы и <em>пакеты</em></h2>
+        </div>
+        <p class="sec__sub" data-reveal>Цена зависит от времени суток и дня недели. По выходным — <span style="color:var(--pink)">красные цены</span>.</p>
+      </div>
+
+      <div class="prices">
+        <div class="panel" data-reveal>
+          <h3>ПК · Standart и VIP</h3>
+          <table class="ptable">
+            <thead>
+              <tr><th></th><th colspan="2">Standart</th><th colspan="2" class="vip">VIP</th></tr>
+              <tr><th scope="col">Тариф</th><th scope="col">Пн–Пт</th><th scope="col">Сб–Вс</th><th scope="col">Пн–Пт</th><th scope="col">Сб–Вс</th></tr>
+            </thead>
+            <tbody id="pcTable"></tbody>
+          </table>
+          <div class="chips">
+            <span class="chip"><b>Утро</b>08:00–14:00</span>
+            <span class="chip"><b>День</b>14:00–18:00</span>
+            <span class="chip"><b>Вечер</b>18:00–08:00</span>
+          </div>
+        </div>
+        <div class="panel" data-reveal>
+          <h3 style="color:var(--pink)">PlayStation 5</h3>
+          <table class="ptable">
+            <thead>
+              <tr><th scope="col">Тариф</th><th scope="col">Пн–Пт</th><th scope="col">Сб–Вс</th></tr>
+            </thead>
+            <tbody id="psTable"></tbody>
+          </table>
+          <div class="chips">
+            <span class="chip"><b>День</b>08:00–18:00</span>
+            <span class="chip"><b>Вечер</b>18:00–08:00</span>
+          </div>
+          <p class="wkd">Цены в рублях. <span>Красным</span> — суббота и воскресенье.</p>
+        </div>
+      </div>
+
+      <!-- calculator -->
+      <div class="calc" data-reveal>
+        <div class="calc__ctl">
+          <h3 style="font-family:var(--font-display);font-weight:400;font-size:22px;text-transform:uppercase">Собери свою сессию</h3>
+          <fieldset class="fld"><legend>Зона</legend>
+            <div class="seg" data-key="zone">
+              <button type="button" data-v="std">Standart</button>
+              <button type="button" data-v="vip">VIP</button>
+              <button type="button" data-v="ps">PS5</button>
+            </div>
+          </fieldset>
+          <fieldset class="fld"><legend>Когда</legend>
+            <div class="seg" data-key="day">
+              <button type="button" data-v="wd">Пн–Пт</button>
+              <button type="button" data-v="we">Сб–Вс</button>
+            </div>
+          </fieldset>
+          <fieldset class="fld"><legend>Пакет</legend>
+            <div class="seg" data-key="pack">
+              <button type="button" data-v="1">1 час</button>
+              <button type="button" data-v="3">3 часа</button>
+              <button type="button" data-v="5">5 часов</button>
+              <button type="button" data-v="night">Ночь</button>
+              <button type="button" data-v="full">Сутки</button>
+            </div>
+          </fieldset>
+          <fieldset class="fld"><legend>Время</legend>
+            <div class="seg" data-key="slot">
+              <button type="button" data-v="morning">Утро<small>08–14</small></button>
+              <button type="button" data-v="day">День<small>14–18</small></button>
+              <button type="button" data-v="evening">Вечер<small>18–08</small></button>
+            </div>
+          </fieldset>
+          <div class="fld" id="playersFld">
+            <label for="players">Игроков <b><span id="playersOut">1</span></b></label>
+            <input id="players" type="range" min="1" max="10" step="1" value="1">
+          </div>
+        </div>
+        <div class="calc__out" aria-live="polite">
+          <div class="out__k">Итого</div>
+          <div class="out__total"><span id="total">0</span> ₽</div>
+          <span class="save" id="save" hidden></span>
+          <div class="out__rows">
+            <div><span>Тариф</span><b id="oTariff">—</b></div>
+            <div><span id="oPerLabel">За человека</span><b id="oPer">—</b></div>
+            <div><span>Время</span><b id="oTime">—</b></div>
+          </div>
+          <a class="btn" href="tel:+79101785252">Забронировать</a>
+        </div>
+      </div>
+      <p class="note">// Цены — по прайсу клуба. Актуальные тарифы и акции уточняйте у администратора.</p>
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section class="sec sec--tight" id="food">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <div class="sec__no" data-reveal>05 // LOOT</div>
+          <h2 class="h2" data-reveal>Кухня <em>Стрит Фуд 67</em></h2>
+        </div>
+        <p class="sec__sub" data-reveal>Не выходя из катки: бургеры, шаурма, хот-доги, авторские лимонады и молочные коктейли.</p>
+      </div>
+      <div class="kitchen">
+        <div class="kitchen__promo" data-reveal>
+          <img src="images/snacks.jpg" alt="Витрина клуба с чипсами и снеками в подсветке" loading="lazy" width="800" height="600">
+          <div class="txt">
+            <div class="brand67"><span>Фудкорт клуба</span>Стрит Фуд 67</div>
+            <p>Горячая еда, кофе, чай и лимонады — плюс витрина со снеками и энергетиками. Заказывай у администратора прямо со своего места.</p>
+            <div class="loot">
+              <div><b>от 220 ₽</b><span>бургеры</span></div>
+              <div><b>от 290 ₽</b><span>шаурма</span></div>
+              <div><b>от 300 ₽</b><span>хот-доги</span></div>
+              <div><b>от 300 ₽</b><span>лимонады 0,5 л</span></div>
+            </div>
+          </div>
+        </div>
+        <div data-reveal>
+          <div class="tabs" role="tablist" aria-label="Разделы меню" id="menuTabs"></div>
+          <div class="menu" id="menuList" role="tabpanel"></div>
+          <p class="note">// Если у вас аллергия на какие-либо ингредиенты, сообщите об этом при заказе.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="sec sec--tight" id="reviews">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <div class="sec__no" data-reveal>06 // ACHIEVEMENTS</div>
+          <h2 class="h2" data-reveal>Нас <em>оценили</em></h2>
+        </div>
+      </div>
+      <div class="ach" data-reveal>
+        <svg class="ach__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>
+        <div>
+          <div class="ach__k">Achievement unlocked</div>
+          <div class="ach__t">Хорошее место 2026</div>
+          <div class="ach__d">Награда Яндекс Карт для мест, которые любят пользователи.</div>
+        </div>
+        <div class="ach__score">
+          <b>5,0</b>
+          <div class="stars" aria-label="5 из 5" id="stars"></div>
+          <span>153 оценки · 137 отзывов</span>
+        </div>
+      </div>
+      <div class="log" data-stagger>
+        <div class="msg" style="--c:var(--cyan)"><div class="msg__h"><i></i><b>[ЖЕЛЕЗО]</b> чаще всего пишут</div><p>Компьютеры мощные, игры идут плавно даже на максимальных настройках, мониторы большие и яркие.</p></div>
+        <div class="msg" style="--c:var(--lime)"><div class="msg__h"><i></i><b>[ПЕРСОНАЛ]</b> чаще всего пишут</div><p>Администраторы вежливые и всегда рядом: помогут запустить игру, подскажут и быстро решат проблему.</p></div>
+        <div class="msg" style="--c:var(--pink)"><div class="msg__h"><i></i><b>[АТМОСФЕРА]</b> чаще всего пишут</div><p>Стильный интерьер, чистота и спокойная обстановка — приятно приходить и одному, и компанией.</p></div>
+      </div>
+      <p class="note">// Пересказ отзывов. Все 137 отзывов — на <a href="https://yandex.ru/maps/org/cyber_dog/226346825352/reviews/" target="_blank" rel="noopener">Яндекс Картах</a></p>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section class="sec sec--tight" id="map">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <div class="sec__no" data-reveal>07 // SPAWN POINT</div>
+          <h2 class="h2" data-reveal>Точка <em>спавна</em></h2>
+        </div>
+      </div>
+      <div class="contact">
+        <div class="info" data-reveal>
+          <div class="info__row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <div><div class="info__k">Адрес</div><div class="info__v">Гусь-Хрустальный,<br>Интернациональная ул., 18</div></div>
+          </div>
+          <div class="info__row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div><div class="info__k">Время работы</div><div class="info__v">Круглосуточно, без выходных</div></div>
+          </div>
+          <div class="info__row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            <div><div class="info__k">Телефон и соцсети</div><div class="info__v"><a href="tel:+79101785252">+7 (910) 178-52-52</a></div>
+              <div class="info__btns">
+                <a class="btn" style="--c:var(--cyan)" href="https://vk.ru/cyber_dogg" target="_blank" rel="noopener">ВКонтакте</a>
+                <a class="btn btn--ghost" href="https://yandex.ru/maps/org/cyber_dog/226346825352/" target="_blank" rel="noopener">Маршрут</a>
+              </div>
+            </div>
+          </div>
+          <div class="info__row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16v16H4zM4 9h16M9 4v16"/></svg>
+            <div><div class="info__k" style="margin-bottom:14px">Квест: как попасть в игру</div>
+              <ol class="quest">
+                <li><div><b>Позвони</b><p>Забронируй место — особенно в выходные.</p></div></li>
+                <li><div><b>Приходи</b><p>Интернациональная, 18 — в центре города.</p></div></li>
+                <li><div><b>Садись и играй</b><p>Админ запустит игру и подскажет, если что-то непонятно.</p></div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="map" data-reveal>
+          <span class="map__corner">YOU ARE HERE</span>
+          <iframe title="CYBER DOGG на Яндекс Картах" loading="lazy" src="https://yandex.ru/map-widget/v1/?ll=40.671836%2C55.614872&z=16&oid=226346825352&ol=biz"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final">
+    <div class="wrap">
+      <div class="count" data-reveal>CONTINUE? 9…</div>
+      <h2 class="h2" data-reveal>Твой ход,<br><em>игрок</em></h2>
+      <p data-reveal>Мы открыты днём и ночью, без выходных. Звони — придержим комп для тебя и твоей пати.</p>
+      <div class="cta" data-reveal>
+        <a class="btn" href="tel:+79101785252">+7 (910) 178-52-52</a>
+        <a class="btn btn--ghost" href="#zones">Выбрать зону</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© CYBER DOGG · кибер-арена и «Стрит Фуд 67» · Гусь-Хрустальный · <a href="https://vk.ru/cyber_dogg" target="_blank" rel="noopener">vk.ru/cyber_dogg</a></span>
+    <span>Секрет: <kbd>↑</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd><kbd>←</kbd><kbd>→</kbd><kbd>B</kbd><kbd>A</kbd></span>
+  </div>
+</footer>
+
+<div class="dock"><a class="btn" href="tel:+79101785252">Забронировать место</a></div>
+
+<div class="lb" role="dialog" aria-modal="true" aria-label="Просмотр фото">
+  <button class="lb__btn lb__close" type="button" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="lb__btn lb__prev" type="button" aria-label="Предыдущее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <figure><img alt=""><figcaption><b></b><span></span></figcaption></figure>
+  <button class="lb__btn lb__next" type="button" aria-label="Следующее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+<div class="toast" role="status" aria-live="polite"><b>★ ACHIEVEMENT</b><span id="toastText">Чит-код активирован</span></div>
+
+<script>
+/* ---------- pixel bulldog ---------- */
+(function(){
+  const map = [
+    "....oooooooooooo....",
+    "oooowwwwwwwwwwwwoooo",
+    "oppowwgwwwwwwgwwoppo",
+    ".opowwwwwwwwwwwwopo.",
+    "..owwgwwgwwgwwgwwo..",
+    ".owwoooowggwoooowwo.",
+    ".owoeEeowwwwoeEeowo.",
+    ".owwoooowggwoooowwo.",
+    "owwwwwgnnnnnngwwwwwo",
+    "owgwwwwnnnnnnwwwwgwo",
+    "owggwwwwonnowwwwggwo",
+    "owgggwoooooooowgggwo",
+    ".owggotmmmmmmtoggwo.",
+    "..owgottttttttogwo..",
+    "...owoooooooooowo...",
+    "....oooooooooooo...."
+  ];
+  const col = {o:"#2a2547",w:"#ece9ff",g:"#a49fd0",p:"#ff2d55",e:"#ff2d55",E:"#ffffff",n:"#141225",m:"#5a1024",t:"#ffffff"};
+  const ns = "http://www.w3.org/2000/svg";
+  function draw(svg){
+    map.forEach((row,y)=>[...row].forEach((ch,x)=>{
+      if(ch===".") return;
+      const r=document.createElementNS(ns,"rect");
+      r.setAttribute("x",x);r.setAttribute("y",y);r.setAttribute("width",1.02);r.setAttribute("height",1.02);
+      r.setAttribute("fill",col[ch]);
+      if(ch==="e"||ch==="E") r.setAttribute("class","eye");
+      svg.appendChild(r);
+    }));
+  }
+  draw(document.getElementById("dog"));
+  draw(document.getElementById("logo-dog"));
+  const star='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5 2 7.5L12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>';
+  document.getElementById("stars").innerHTML=star.repeat(5);
+})();
+
+/* ---------- gallery data ---------- */
+(function(){
+  const shots=[
+    ["images/photo-01.jpg","images/photo-01-full.jpg","Главный зал","shot--w shot--t"],
+    ["images/vip-door.jpg","images/vip-door-full.jpg","Вход в VIP-комнату","shot--t"],
+    ["images/photo-05.jpg","images/photo-05-full.jpg","Катка в разгаре",""],
+    ["images/ps5-room.jpg","images/ps5-room-full.jpg","PS5-комната","shot--t"],
+    ["images/photo-07.jpg","images/photo-07-full.jpg","Игровые места","shot--w"],
+    ["images/photo-06.jpg","images/photo-06-full.jpg","Неон-арт",""],
+    ["images/snacks.jpg","images/snacks-full.jpg","Снеки на витрине","shot--w"],
+    ["images/photo-09.jpg","images/photo-09-full.jpg","Напитки",""],
+    ["images/photo-08.jpg","images/photo-08-full.jpg","Вывеска клуба",""],
+    ["images/photo-10.jpg","images/photo-10-full.jpg","Экран в игре",""],
+    ["images/photo-11.jpg","images/photo-11-full.jpg","Места с подсветкой",""],
+    ["images/photo-12.jpg","images/photo-12-full.jpg","Геймплей","shot--w"],
+    ["images/photo-13.jpg","images/photo-13-full.jpg","Вход в клуб",""],
+    ["images/photo-14.jpg","images/photo-14-full.jpg","Общий зал",""],
+    ["images/photo-15.jpg","images/photo-15-full.jpg","Монитор и периферия",""]
+  ];
+  const n=shots.length, pad=v=>String(v).padStart(2,"0");
+  document.getElementById("galleryGrid").innerHTML=shots.map(([s,f,c,k],i)=>
+    `<button class="shot ${k}" type="button" data-full="${f}" data-cap="${c}">
+      <img src="${s}" alt="${c} — фото клуба CYBER DOGG" loading="lazy" width="800" height="800">
+      <span class="shot__cap"><span>${c}</span><i>${pad(i+1)}/${pad(n)}</i></span>
+    </button>`).join("");
+})();
+
+/* ---------- lightbox ---------- */
+(function(){
+  const shots=[...document.querySelectorAll(".shot")];
+  const lb=document.querySelector(".lb"), im=lb.querySelector("img"), cap=lb.querySelector("figcaption b"), cnt=lb.querySelector("figcaption span");
+  let i=0, last=null;
+  function show(n){
+    i=(n+shots.length)%shots.length;
+    const s=shots[i];
+    im.src=s.dataset.full; im.alt=s.dataset.cap+" — фото клуба CYBER DOGG";
+    cap.textContent=s.dataset.cap; cnt.textContent=String(i+1).padStart(2,"0")+" / "+String(shots.length).padStart(2,"0");
+    window.dispatchEvent(new CustomEvent("lb:show",{detail:im}));
+  }
+  function open(n){ last=document.activeElement; lb.classList.add("open"); document.body.style.overflow="hidden"; show(n); lb.querySelector(".lb__close").focus(); }
+  function close(){ lb.classList.remove("open"); document.body.style.overflow=""; last&&last.focus(); }
+  shots.forEach((s,n)=>s.addEventListener("click",()=>open(n)));
+  lb.querySelector(".lb__close").addEventListener("click",close);
+  lb.querySelector(".lb__prev").addEventListener("click",()=>show(i-1));
+  lb.querySelector(".lb__next").addEventListener("click",()=>show(i+1));
+  lb.addEventListener("click",e=>{ if(e.target===lb) close(); });
+  addEventListener("keydown",e=>{
+    if(!lb.classList.contains("open")) return;
+    if(e.key==="Escape") close();
+    if(e.key==="ArrowLeft") show(i-1);
+    if(e.key==="ArrowRight") show(i+1);
+  });
+  let x0=null;
+  lb.addEventListener("touchstart",e=>x0=e.touches[0].clientX,{passive:true});
+  lb.addEventListener("touchend",e=>{ if(x0===null) return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50) show(i+(dx<0?1:-1)); x0=null; });
+})();
+
+/* ---------- prices + calculator ---------- */
+(function(){
+  // [1 ч, 3 ч, 5 ч] по времени суток; ночь и сутки — отдельные пакеты
+  const P={
+    std:{wd:{morning:[65,165,260],day:[100,250,400],evening:[130,325,520],night:650,full:1300},
+         we:{morning:[75,190,300],day:[120,300,480],evening:[150,375,600],night:750,full:1500}},
+    vip:{wd:{morning:[100,250,400],day:[160,400,640],evening:[200,500,800],night:1000,full:2000},
+         we:{morning:[110,275,440],day:[180,450,720],evening:[220,550,880],night:1100,full:2200}},
+    ps: {wd:{day:[200,500,800],evening:[250,625,1000]},
+         we:{day:[250,625,1000],evening:[300,750,1200]}}
+  };
+  const fmt=v=>v.toLocaleString("ru-RU");
+  const SL={morning:"утро",day:"день",evening:"вечер"};
+  const PCW={morning:"08:00–14:00",day:"14:00–18:00",evening:"18:00–08:00"};
+  const PSW={day:"08:00–18:00",evening:"18:00–08:00"};
+  const PI={"1":0,"3":1,"5":2}, PN={"1":"1 час","3":"3 часа","5":"5 часов",night:"Ночь",full:"Сутки"};
+
+  // tables
+  const rows=[];
+  ["1","3","5"].forEach((h,gi)=>["morning","day","evening"].forEach((s,si)=>rows.push(
+    `<tr${gi&&!si?' class="grp"':''}><td>${PN[h]} · ${SL[s]}</td><td>${P.std.wd[s][PI[h]]}</td><td class="we">${P.std.we[s][PI[h]]}</td><td>${P.vip.wd[s][PI[h]]}</td><td class="we">${P.vip.we[s][PI[h]]}</td></tr>`)));
+  ["night","full"].forEach((k,i)=>rows.push(`<tr${!i?' class="grp"':''}><td>${PN[k]}</td><td>${fmt(P.std.wd[k])}</td><td class="we">${fmt(P.std.we[k])}</td><td>${fmt(P.vip.wd[k])}</td><td class="we">${fmt(P.vip.we[k])}</td></tr>`));
+  document.getElementById("pcTable").innerHTML=rows.join("");
+  const ps=[];
+  ["1","3","5"].forEach((h,gi)=>["day","evening"].forEach((s,si)=>ps.push(
+    `<tr${gi&&!si?' class="grp"':''}><td>${PN[h]} · ${SL[s]}</td><td>${fmt(P.ps.wd[s][PI[h]])}</td><td class="we">${fmt(P.ps.we[s][PI[h]])}</td></tr>`)));
+  document.getElementById("psTable").innerHTML=ps.join("");
+
+  // calculator state — sensible defaults from current day/time
+  const now=new Date(), hr=now.getHours(), dow=now.getDay();
+  const st={zone:"std",day:(dow===0||dow===6)?"we":"wd",pack:"3",slot:hr>=8&&hr<14?"morning":hr>=14&&hr<18?"day":"evening"};
+  const segs=[...document.querySelectorAll(".seg")];
+  const players=document.getElementById("players"), pOut=document.getElementById("playersOut");
+  const out={total:document.getElementById("total"),save:document.getElementById("save"),tariff:document.getElementById("oTariff"),per:document.getElementById("oPer"),perL:document.getElementById("oPerLabel"),time:document.getElementById("oTime")};
+  let shown=0;
+
+  function sync(){
+    const ps=st.zone==="ps";
+    if(ps && (st.pack==="night"||st.pack==="full")) st.pack="3";
+    if(ps && st.slot==="morning") st.slot="day";
+    const timed=!(st.pack==="night"||st.pack==="full");
+    segs.forEach(seg=>{
+      const key=seg.dataset.key;
+      seg.querySelectorAll("button").forEach(b=>{
+        const v=b.dataset.v;
+        let dis=false;
+        if(key==="pack" && ps && (v==="night"||v==="full")) dis=true;
+        if(key==="slot" && (!timed || (ps && v==="morning"))) dis=true;
+        b.disabled=dis;
+        b.setAttribute("aria-pressed", String(st[key]===v && !(key==="slot" && !timed)));
+      });
+    });
+    // PS slot labels use PS time windows
+    const slotBtns=document.querySelectorAll('[data-key="slot"] button');
+    slotBtns[1].querySelector("small").textContent=ps?"08–18":"14–18";
+    document.getElementById("playersFld").style.display=ps?"none":"";
+    calc(timed, ps);
+  }
+
+  function calc(timed, ps){
+    const n=ps?1:+players.value;
+    const tbl=P[st.zone][st.day];
+    let price, saving=0, time;
+    if(timed){
+      price=tbl[st.slot][PI[st.pack]];
+      const hourly=tbl[st.slot][0]*(+st.pack);
+      saving=hourly-price;
+      time=(ps?PSW:PCW)[st.slot];
+    } else {
+      price=tbl[st.pack];
+      time=st.pack==="full"?"24 часа":"ночной пакет";
+    }
+    const total=price*n;
+    out.tariff.textContent=`${{std:"Standart",vip:"VIP",ps:"PS5"}[st.zone]} · ${PN[st.pack]}${timed?" · "+SL[st.slot]:""}`;
+    out.perL.textContent=ps?"За комнату с PS5":"За человека";
+    out.per.textContent=fmt(price)+" ₽";
+    out.time.textContent=(st.day==="we"?"Сб–Вс · ":"Пн–Пт · ")+time;
+    if(saving>0){ out.save.hidden=false; out.save.textContent=`ВЫГОДА −${fmt(saving*n)} ₽ к почасовой`; } else out.save.hidden=true;
+    const from=shown; shown=total;
+    out.total.textContent=fmt(total); // always correct, even if animation never ticks
+    window.dispatchEvent(new CustomEvent("calc:total",{detail:{from,to:total,el:out.total}}));
+  }
+
+  segs.forEach(seg=>seg.addEventListener("click",e=>{
+    const b=e.target.closest("button"); if(!b||b.disabled) return;
+    st[seg.dataset.key]=b.dataset.v; sync();
+  }));
+  function fill(){ const pc=(players.value-players.min)/(players.max-players.min)*100; players.style.setProperty("--p",pc+"%"); }
+  players.addEventListener("input",()=>{ pOut.textContent=players.value; fill(); sync(); });
+  fill(); sync();
+})();
+
+/* ---------- menu ---------- */
+(function(){
+  const M=[
+    {t:"Бургеры",items:[
+      ["Бургер Дракон","255 г",490,"булочка, котлета говяжья, айсберг, томаты, бекон, сырный соус, шрирача"],
+      ["Бургер Классика","320 г",530,"булочка, котлета говяжья, айсберг, томат, красный лук, чеддер"],
+      ["Бургер Мачете","265 г",430,"булочка, котлета говяжья, айсберг, огурец свежий, корнишоны, лук маринованный, соус макси бургер"],
+      ["Бургер Том Ям","220 г",410,"булочка, креветка, соус том ям, томат, шампиньоны, чеддер"],
+      ["Бургер Том Кха","260 г",490,"булочка, котлета говяжья, соус том кха, моцарелла, шампиньоны, лук красный, томат"],
+      ["Гамбургер","145 г",220,"булочка, котлета говяжья, айсберг, соус классика, корнишоны"],
+      ["Чизбургер","150 г",240,"булочка, котлета говяжья, кетчуп, горчица, корнишоны, чеддер"]]},
+    {t:"Шаурма",items:[
+      ["Шаурма Гриль","290 г",450,"лаваш, айсберг, котлета говяжья, чеддер, корнишоны, черри, лук жареный, соус макси бургер"],
+      ["Шаурма Том Ям","230 г",290,"лаваш, айсберг, креветки, кинза, томат, огурец свежий, лук жареный, соус том ям"],
+      ["Шаурма Том Кха","240 г",290,"лаваш, курица жареная, айсберг, шампиньоны, томат, соус том кха"],
+      ["Шаурма Фри","310 г",330,"лаваш, свинина жареная, айсберг, красный лук, томат, огурец свежий, картофель фри, соус классика"],
+      ["Шаурма с беконом","260 г",330,"лаваш, курица жареная, чесночный соус, айсберг, корнишоны, томат, лук красный, бекон"],
+      ["Шаурма Цезарь","240 г",300,"лаваш, курица жареная, айсберг, томат, цезарь соус, пармезан, лук жареный"],
+      ["Шаурма Острая","265 г",350,"лаваш, свинина жареная, халапеньо, айсберг, томат, огурец свежий, острый соус"],
+      ["Шаурма Томатная","255 г",370,"лаваш, фарш говяжий, айсберг, перец болгарский, кукуруза, соус томатный, чеддер"]]},
+    {t:"Хот-доги и сэндвичи",items:[
+      ["Хот-дог №1","205 г",300,"булка, сосиска куриная, релиш, кетчуп, горчица, лук маринованный, лук жареный"],
+      ["Хот-дог Барбекю","200 г",300,"булка, сосиска куриная, бекон, чесночный соус, барбекю, жареный лук, корнишоны, укроп"],
+      ["Хот-дог Гриль","205 г",300,"булка, сосиска куриная, огурец свежий, томат, яйцо, укроп, соус макси бургер"],
+      ["Хот-дог Классика","200 г",300,"булка, сосиска куриная, чеддер, кетчуп, горчица"],
+      ["Хот-дог Ананас","155 г",330,"булка, сосиска куриная, корнишоны, ананас, чеддер, кисло-сладкий соус, шрирача"],
+      ["Хот-дог Том Ям","240 г",300,"булка, креветка, томат, шампиньоны, соус том ям, кинза, огурец свежий"],
+      ["Сэндвич с окороком","255 г",350,"чиабатта, окорок, яйцо, томат, айсберг, соус макси бургер"],
+      ["Сэндвич Цезарь","210 г",350,"чиабатта, курица жареная, айсберг, томат, пармезан, соус цезарь"],
+      ["Сэндвич Томатный","270 г",350,"чиабатта, фарш говяжий, томатный соус, пепперони, корнишоны, моцарелла, томат"],
+      ["Сэндвич Том Кха","255 г",330,"чиабатта, курица жареная, айсберг, шампиньоны, томат, соус том кха, кинза"],
+      ["Сэндвич Том Ям","260 г",330,"чиабатта, айсберг, креветки, томат, огурец свежий, лук жареный, кинза, соус том ям"]]},
+    {t:"Кесадилья",items:[
+      ["Кесадилья","295 г",330,"тортилья, яйцо, курица жареная, лук маринованный, айсберг, томат, гауда, чесночный соус"],
+      ["Кесадилья Свиная","215 г",330,"тортилья, свинина жареная, лук репчатый, кукуруза, болгарский перец, укроп, моцарелла, соус терияки"],
+      ["Кесадилья Том Кха","210 г",330,"тортилья, курица жареная, перец болгарский, халапеньо, томат, шампиньоны, соус том кха, пармезан"],
+      ["Кесадилья Том Ям","190 г",330,"тортилья, креветки, лук красный, шампиньоны, соус том ям, моцарелла"]]},
+    {t:"Закуски",items:[
+      ["Луковые кольца","6 шт",170],["Картофель фри","",200],["Картофель по-деревенски","",200],
+      ["Наггетсы","6 шт",200],["Наггетсы","9 шт",260],["Наггетсы","12 шт",320],
+      ["Сырные шарики","6 шт",270],["Сырные шарики","9 шт",370],["Сырные шарики","12 шт",470],
+      ["Пельмени жареные","250 г",350],["Гренки","200 г",150],
+      {sub:"Соусы · 50 г"},
+      ["Кетчуп · Острый · Сырный","",60],["Барбекю · Кимчи · Цезарь","",60],["Сливочно-чесночный · Кисло-сладкий · Терияки","",60]]},
+    {t:"Салаты и десерты",items:[
+      ["Цезарь с курицей","220 г",390,"айсберг, курица жареная, черри, соус цезарь, пармезан, сухари"],
+      ["Цезарь с креветками","220 г",450,"айсберг, креветки, черри, соус цезарь, пармезан, сухари"],
+      ["Чизкейк","",250]]},
+    {t:"Напитки",items:[
+      {sub:"Лимонады · 0,5 / 1 л — 300 / 550 ₽"},
+      ["Малина-мята · Клубника-киви","0,5 л",300],["Фейхоа-иланг-иланг · Мохито","0,5 л",300],["Черника-лаванда · Ежевика-гранат","0,5 л",300],
+      {sub:"Молочные коктейли · 400 мл"},
+      ["Авторские: малина-бабл гам, клубника-банан, ежевика-киви, вишня-чёрная смородина","",350],
+      ["Классик: ванильный, шоколадный, клубничный","",300],
+      {sub:"Кофе"},
+      ["Эспрессо","50 мл",150],["Американо","200 мл",200],["Капучино","250 мл",250],["Латте","250 мл",270],["Айс Латте","250 мл",270],
+      {sub:"Чай · 800 мл"},
+      ["Авторский: клубника-мята, облепиха-имбирь, чёрная смородина-розмарин, вишня-корица","",350],
+      ["Классический: ассам, сенча, эрл грей, с чабрецом","",250],
+      ["Добавки: лимон, мята, мёд, сироп","",70]]}
+  ];
+  const tabs=document.getElementById("menuTabs"), list=document.getElementById("menuList");
+  tabs.innerHTML=M.map((c,i)=>`<button type="button" role="tab" id="tab${i}" aria-selected="${i===0}" aria-controls="menuList">${c.t}</button>`).join("");
+  function render(i){
+    list.setAttribute("aria-labelledby","tab"+i);
+    list.innerHTML=M[i].items.map(it=>it.sub?`<div class="menu__sub">${it.sub}</div>`:
+      `<div class="mi"><h4>${it[0]}${it[1]?`<small>${it[1]}</small>`:""}</h4>${it[3]?`<p>${it[3]}</p>`:""}<span class="pr">${it[2]} ₽</span></div>`).join("");
+    tabs.querySelectorAll("button").forEach((b,j)=>{ b.setAttribute("aria-selected",String(j===i)); b.tabIndex=j===i?0:-1; });
+    window.dispatchEvent(new CustomEvent("menu:render",{detail:list}));
+  }
+  tabs.addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) render([...tabs.children].indexOf(b)); });
+  tabs.addEventListener("keydown",e=>{
+    const btns=[...tabs.children], cur=btns.findIndex(b=>b.getAttribute("aria-selected")==="true");
+    if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft") return;
+    const nx=(cur+(e.key==="ArrowRight"?1:-1)+btns.length)%btns.length; render(nx); btns[nx].focus();
+  });
+  render(0);
+})();
+</script>
+
+<script type="module">
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let M = null;
+if(!reduce){
+  try{
+    M = await import("https://cdn.jsdelivr.net/npm/motion@11.18.2/+esm");
+    document.documentElement.classList.add("js-motion");
+  }catch(e){ M = null; }
+}
+
+const dog = document.getElementById("dog");
+const bark = document.querySelector(".bark");
+const hp = document.getElementById("hp");
+const pets = document.getElementById("pets");
+const toast = document.querySelector(".toast");
+const toastText = document.getElementById("toastText");
+
+let petCount = 0;
+dog.addEventListener("click", () => {
+  petCount++;
+  pets.textContent = `погладил ×${petCount}`;
+  if(M){
+    M.animate(dog, { scale:[1,1.12,0.96,1], rotate:[0,-6,4,0] }, { duration:.45, ease:"easeOut" });
+    M.animate(bark, { opacity:[0,1,1,0], y:[10,-14,-20,-30], scale:[.6,1.2,1,1] }, { duration:.9 });
+    M.animate(hp, { scaleX:[.55,1] }, { duration:.6, ease:[.2,.9,.3,1.2] });
+  }
+  if(petCount === 10) showToast("Лучший друг бульдога — 10 поглаживаний");
+});
+
+function showToast(text){
+  toastText.textContent = text;
+  if(M) M.animate(toast, { opacity:[0,1,1,0], y:[-20,0,0,-10] }, { duration:3.2, times:[0,.1,.85,1] });
+  else { toast.style.opacity = 1; setTimeout(()=>toast.style.opacity = 0, 3000); }
+}
+
+const code = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+let pos = 0;
+addEventListener("keydown", e => {
+  const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+  pos = (k === code[pos]) ? pos + 1 : (k === code[0] ? 1 : 0);
+  if(pos === code.length){
+    pos = 0;
+    showToast("Чит-код принят: +100 к удаче в катке");
+    document.documentElement.style.setProperty("--lime", "#ffc83d");
+    setTimeout(()=>document.documentElement.style.setProperty("--lime","#c6ff3d"), 6000);
+  }
+});
+
+if(M){
+  const { animate, stagger, scroll } = M;
+  const ease = [0.16, 1, 0.3, 1];
+  const fmt = v => Math.round(v).toLocaleString("ru-RU");
+
+  const inView = (target, cb) => {
+    const els = typeof target === "string" ? document.querySelectorAll(target) : [target];
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if(en.isIntersecting){ io.unobserve(en.target); cb(en.target); }
+    }), { rootMargin:"0px 0px -8% 0px" });
+    els.forEach(el => io.observe(el));
+  };
+
+  animate(dog, { y:[0,-8,0] }, { duration:3.2, repeat:Infinity, ease:"easeInOut" });
+  animate("#dog .eye", { opacity:[1,.35,1] }, { duration:.3, repeat:Infinity, repeatDelay:2.4 });
+  animate(".hero__photo", { scale:[1.12,1] }, { duration:2.4, ease });
+
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const to = +el.dataset.count, dec = +(el.dataset.dec || 0);
+    animate(0, to, { duration:1.4, ease, onUpdate:v => el.textContent = v.toFixed(dec).replace(".", ",") });
+  });
+
+  inView("[data-reveal]", el => animate(el, { opacity:[0,1], y:[28,0] }, { duration:.7, ease }));
+
+  document.querySelectorAll("[data-stagger]").forEach(group => {
+    const kids = [...group.children];
+    kids.forEach(k => k.style.opacity = 0);
+    inView(group, () => animate(kids, { opacity:[0,1], y:[36,0], scale:[.96,1] }, { duration:.6, delay:stagger(.06), ease }));
+  });
+
+  /* calculator total roll */
+  let calcAnim = null;
+  addEventListener("calc:total", e => {
+    const { from, to, el } = e.detail;
+    calcAnim && calcAnim.stop();
+    calcAnim = animate(from, to, { duration:.45, ease, onUpdate:v => el.textContent = fmt(v), onComplete:() => el.textContent = fmt(to) });
+    animate(el, { scale:[1.06,1] }, { duration:.3 });
+  });
+
+  /* menu items cascade on tab switch */
+  addEventListener("menu:render", e => animate(e.detail.children, { opacity:[0,1], x:[-12,0] }, { duration:.35, delay:stagger(.025), ease }));
+
+  addEventListener("lb:show", e => animate(e.detail, { opacity:[0,1], scale:[.96,1] }, { duration:.35, ease }));
+
+  scroll(animate(".hero__sun", { y:[0,180], scale:[1,1.25] }, { ease:"linear" }), { target: document.querySelector(".hero"), offset:["start start","end start"] });
+
+  inView(".count", el => {
+    let n = 9;
+    const id = setInterval(() => { n--; el.textContent = n > 0 ? `CONTINUE? ${n}…` : "CONTINUE? → ЗВОНИ"; if(n <= 0) clearInterval(id); }, 700);
+  });
+}
+</script>
+</body>
+</html>
